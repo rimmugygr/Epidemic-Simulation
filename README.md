@@ -14,18 +14,7 @@
 
 
 ## How to Run?
-### Run using docker(preferred) by docker-compose
-Make sure docker is up and running on your local machine, and ports 8080, 8081, 8082, 8090, 3306  are free
 
-1. Download the repo and execute the following commands in the same order
-2. Build the project
-    ```shell script
-    mvn clean package -DskipTests
-      ```
-3. Build credit dockers images
-    ```shell script
-    docker-compose up --force-recreate
-      ```   
 
 ## Documentation
 
