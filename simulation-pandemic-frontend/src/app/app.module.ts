@@ -7,12 +7,10 @@ import {SimulationPageModule} from "./pages/simulation-page/simulation-page.modu
 import {BrowserModule} from "@angular/platform-browser";
 import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
-import { SimulationDetailPageComponent } from './pages/simulation-page/component/simulation-detail-page/simulation-detail-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SimulationDetailPageComponent,
   ],
   imports: [
     AppRoutingModule,

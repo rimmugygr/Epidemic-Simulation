@@ -6,7 +6,6 @@ import { HomePageComponent } from './home-page.component';
 
 @NgModule({
   declarations: [
-
     HomePageComponent
   ],
   imports: [

@@ -12,7 +12,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/simulations/")
+@RequestMapping("/api/simulations/")
 public class SimulationController {
     private final SimulationService service;
     private final SimulationMapper mapper;
