@@ -1,0 +1,46 @@
+POST http://localhost:8080/simulations/
+Content-Type: application/json
+
+{
+  "name": "aaaa",
+  "population": 100,
+  "initInfected": 2,
+  "reproduction": 1,
+  "mortality": 10,
+  "daysToRecover": 5,
+  "daysOfSimulation": 10,
+  "daysToDeath": 3
+}
+
+###
+GET http://localhost:8080/simulations/
+Accept: application/json
+
+###
+POST http://localhost:8080/simulations/
+Content-Type: application/json
+
+{
+  "name": "aaaa",
+  "population": 100,
+  "initInfected": 1,
+  "reproduction": 1,
+  "mortality": 50,
+  "daysToRecover": 4,
+  "daysOfSimulation": 10,
+  "daysToDeath": 2
+}
+###
+PUT http://localhost:8080/simulations/1
+Content-Type: application/json
+
+{
+  "name": "bbb",
+  "population": 1000,
+  "initInfected": 1,
+  "reproduction": 1,
+  "mortality": 50,
+  "daysToRecover": 4,
+  "daysOfSimulation": 10,
+  "daysToDeath": 2
+}
