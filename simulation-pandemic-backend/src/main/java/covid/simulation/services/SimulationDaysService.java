@@ -45,7 +45,7 @@ public class SimulationDaysService {
 
     @Transactional
     public List<SimulationDayDto> regeneratedSimulationDays(SimulationDto simulation) {
-        // delete old list of simulation days
+        // delete old list of simulation days if exists
         this.deleteSimulationDaysBySimulation(simulation);
 
         // generate and save new list of simulation days

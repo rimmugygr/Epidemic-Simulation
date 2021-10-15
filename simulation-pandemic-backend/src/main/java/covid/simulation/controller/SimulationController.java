@@ -23,6 +23,12 @@ public class SimulationController {
         return service.getAllSimulations();
     }
 
+    @GetMapping(path = "{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public SimulationDto getSimulation(@PathVariable Long id) {
+        return service.getSimulationById(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public SimulationDto postSimulation(@RequestBody SimulationRequest simulationRequest) {

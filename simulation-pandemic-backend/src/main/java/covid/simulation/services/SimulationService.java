@@ -37,7 +37,9 @@ public class SimulationService {
 
     @Transactional
     public SimulationDto addSimulationNew(SimulationDto simulationNewDto) {
-        this.isSimulationValidate(simulationNewDto);
+
+        //validation simulation parameters
+        this.isSimulationValidateOrThrowException(simulationNewDto);
 
         Simulation simulationNew = simulationMapper.map(simulationNewDto);
         Simulation simulationSaved = simulationRepo.save(simulationNew);
@@ -50,13 +52,13 @@ public class SimulationService {
 
     @Transactional
     public SimulationDto updateSimulation(SimulationDto simulationDto, Long id) {
-        isSimulationExistOrThrowException(id);
 
-        simulationDto.setSimulationDayList(generateService.generateSimulationDays(simulationDto));
+        //validation simulation parameters
+        isSimulationExistOrThrowException(id);
 
         Simulation simulation = simulationMapper.map(simulationDto);
 
-        // generate new simulation
+        // regenerate new simulation
         simulationDaysService.regeneratedSimulationDays(simulationDto);
 
         return simulationMapper.mapToDto(simulationRepo.save(simulation));
@@ -69,7 +71,7 @@ public class SimulationService {
         simulationRepo.deleteById(id);
     }
 
-    private void isSimulationValidate(SimulationDto simulation) {
+    private void isSimulationValidateOrThrowException(SimulationDto simulation) {
         if(isNotIntegerNumber(simulation.getDaysOfSimulation()) || simulation.getDaysOfSimulation() < 1)
             throw new ResourceUnprocessable("Simulation days are incorrect");
 
