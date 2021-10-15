@@ -19,6 +19,10 @@
 ## Documentation
 
 backend api:
+```
+https://github.com/rimmugygr/Epidemic-Simulation/blob/master/api-docs-generated-by-swagger.txt
+```
+```
 https://www.postman.com/collections/f2226638d19c1478728a
-
+```
 ## Sample use
