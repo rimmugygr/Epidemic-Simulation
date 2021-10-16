@@ -32,7 +32,7 @@ export class SimulationService {
     );
   }
 
-  patchStudent(simulation: Simulation): Observable<Simulation>  {
+  putStudent(simulation: Simulation): Observable<Simulation>  {
     return this.http.put<Simulation>(this.baseUrl + '/' + simulation.id, JSON.stringify(simulation)).pipe(
       tap(x => console.log('PUTED' + JSON.stringify(x)))
     );

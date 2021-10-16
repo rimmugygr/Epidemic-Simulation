@@ -1,5 +1,5 @@
 export interface Simulation {
-  id?: number;
+  id: number;
   name: string;
   population: number;
   initInfected: number;

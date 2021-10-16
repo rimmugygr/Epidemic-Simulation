@@ -7,6 +7,14 @@ import {SimulationPageModule} from "./pages/simulation-page/simulation-page.modu
 import {BrowserModule} from "@angular/platform-browser";
 import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
+import {NgxsModule} from "@ngxs/store";
+import {environment} from "../environments/environment";
+import {StateClass} from "@ngxs/store/internals";
+import {NgxsStoragePluginModule, StorageOption} from "@ngxs/storage-plugin";
+import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
+
+const persistentStates: StateClass<any>[] = [SimulationState];
+const states: StateClass<any>[] = [...persistentStates, GeneratedSimulationState];
 
 @NgModule({
   declarations: [
@@ -18,7 +26,10 @@ import {HttpClientModule} from "@angular/common/http";
     BrowserModule,
     SharedModule,
     HomePageModule,
-    SimulationPageModule
+    SimulationPageModule,
+    NgxsModule.forRoot(states, {developmentMode: !environment.production}),
+    NgxsStoragePluginModule.forRoot({ key: persistentStates, storage: StorageOption.LocalStorage}),
+    NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
   ],
   providers: [],
   bootstrap: [AppComponent]
