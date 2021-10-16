@@ -1,87 +1,111 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FORM_MODE} from "../../../../shared/model/form-mode.model";
-import {SimulationService} from "../../../../shared/services/simulation.service";
 import {Simulation} from "../../../../shared/model/simulation.model";
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {ActivatedRoute} from "@angular/router";
+import {Store} from "@ngxs/store";
+import {getPageMode} from "../../../../shared/utils/utils";
+import {PageMode} from "../../../../shared/model/page-mode.model";
+import {SimulationState} from "../../../../shared/state/simulations/simulation.state";
+import {
+  CreateSimulation,
+  DeleteSimulation,
+  UpdateSimulation
+} from "../../../../shared/state/simulations/simulation.actions";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-simulation-form',
   templateUrl: './simulation-form.component.html',
   styleUrls: ['./simulation-form.component.css']
 })
-export class SimulationFormComponent implements OnInit {
-  @Input() pageMode: FORM_MODE;
-  @Input() simulations: Simulation;
-  @Input() simulationId: number;
-  hide = true;
-  form: FormGroup;
-  message = '';
+ export class SimulationFormComponent implements OnInit {
+  pageMode: PageMode;
+  simulations: Simulation;
+  simulationId: number;
+  simulationForm: FormGroup;
 
-  constructor(public modal: NgbActiveModal,
-              private simulationService: SimulationService) { }
+  showErrors = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private store: Store,
+    private location: Location,
+  ) { }
 
   ngOnInit(): void {
+    this.pageMode = getPageMode(this.route);
     this.initForm();
   }
 
-  submitForm(): void {
-    if (this.isDeleteMode()) {
-      // this.store.dispatch(new DeleteStudent({student: this.form.getRawValue()}));
-    }
-    if (this.form.valid) {
-      if (this.isCreateMode()) {
-        // this.store.dispatch(new CreateStudent({student: this.form.value}));
-        this.modal.close();
-      }
-      if (this.isEditMode()) {
-        // this.store.dispatch(new UpdateStudent({student: this.form.getRawValue()}));
-        this.modal.close();
-      }
-    } else {
-      this.message = 'Pleas fill all form !';
-    }
-  }
-
   private initForm(): void {
-    this.form = new FormGroup({
-      id: new FormControl({value: null, disabled: true}),
-      name: new FormControl(null, Validators.required),
-      population: new FormControl(null, Validators.required),
-      initInfected: new FormControl(null, Validators.required),
-      reproduction: new FormControl(null, Validators.required),
-      mortality: new FormControl(null, Validators.required),
-      daysToRecover: new FormControl(null, Validators.required),
-      daysToDeath: new FormControl(null, Validators.required),
-      daysOfSimulation: new FormControl(null, Validators.required)
+    this.simulationForm = this.fb.group({
+      id: [null, {disabled: true}],
+      name: [null, Validators.required],
+      population: [null, Validators.required],
+      initInfected: [null, Validators.required],
+      reproduction: [null, Validators.required],
+      mortality: [null, Validators.required],
+      daysToRecover: [null, Validators.required],
+      daysToDeath: [null, Validators.required],
+      daysOfSimulation: [null, Validators.required],
     });
 
-
-
-
-
-    if (this.isEditMode() || this.isDetailsMode() || this.isDeleteMode()) {
-      // this.student = this.store.selectSnapshot(ProfilesStudentsListState.getStudentById)(this.studentId);
-      // this.form.patchValue({...this.student});
+    if (this.pageMode.formMode !== FORM_MODE.CREATE) {
+      const simulation = this.store.selectSnapshot(SimulationState.getSimulationById)(+this.pageMode.id);
+      this.simulationForm.patchValue(simulation);
     }
-    if (this.isDetailsMode()) {
-      this.form.disable();
+
+    if (this.pageMode.formMode === FORM_MODE.DETAILS) {
+      this.simulationForm.disable();
+    }
+
+  }
+
+
+  save(): void {
+    this.showErrors = true;
+
+    if (!this.simulationForm.invalid) {
+      console.log('ready to save', this.simulationForm.value);
+
+      this.store.dispatch(new CreateSimulation({ simulation: this.simulationForm.value })).subscribe(
+        success => {
+          console.log('request success', success);
+        },
+        error => {
+          console.error('request errored:', error);
+        },
+        () => { console.log('request completed'); },
+      );
+    } else {
+      console.log('not ready to save', this.simulationForm.value);
     }
   }
 
-  isEditMode(): boolean {
-    return this.pageMode === FORM_MODE.EDIT;
+  update(): void {
+    this.store.dispatch(new UpdateSimulation({ simulation: this.simulationForm.value }));
   }
 
-  isDetailsMode(): boolean {
-    return this.pageMode === FORM_MODE.DETAILS;
+  delete(): void {
+    this.store.dispatch(new DeleteSimulation({ id: this.simulationForm.value.id }));
   }
 
-  isCreateMode(): boolean {
-    return this.pageMode === FORM_MODE.CREATE;
+  goBack(): void {
+    this.location.back();
   }
 
-  isDeleteMode(): boolean {
-    return this.pageMode === FORM_MODE.DELETE;
+  ifRequired(value: string): boolean {
+    const field = this.simulationForm.get(value);
+
+    return this.showErrors ? field.errors?.required : field.touched && field.errors?.required;
   }
+
+  getPageModeCamelCase(): string {
+    return this.pageMode.formMode;
+  }
+
+
+
 }

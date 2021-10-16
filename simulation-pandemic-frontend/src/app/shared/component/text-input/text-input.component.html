@@ -1,0 +1,5 @@
+<div [formGroup]="form">
+  <label [for]="id">{{ label }}</label>
+  <input [class.is-invalid]="ifRequired(id)" [formControlName]="id" type="text" [id]="id" class="form-control" [placeholder]="placeholder">
+  <small *ngIf="ifRequired(id)" [id]="'validator-' + id" class="text-danger">This field is required</small>
+</div>

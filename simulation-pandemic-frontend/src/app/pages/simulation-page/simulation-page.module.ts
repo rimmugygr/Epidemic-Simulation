@@ -4,6 +4,8 @@ import {SimulationDetailPageComponent} from "./component/simulation-detail-page/
 import {SimulationListPageComponent} from "./component/simulation-list-page/simulation-list-page.component";
 import {SimulationPageRoutingModule} from "./simulation-page-routing.module";
 import { SimulationFormComponent } from './component/simulation-form/simulation-form.component';
+import {SharedModule} from "../../shared/shared.module";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 
 
@@ -15,7 +17,9 @@ import { SimulationFormComponent } from './component/simulation-form/simulation-
   ],
   imports: [
     SimulationPageRoutingModule,
-    CommonModule
+    CommonModule,
+    SharedModule,
+    FontAwesomeModule
   ]
 })
 export class SimulationPageModule { }

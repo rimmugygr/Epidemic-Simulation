@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: ``,
-    redirectTo: `home`,
+    redirectTo: `simulation`,
     pathMatch: `full`
   },
   {

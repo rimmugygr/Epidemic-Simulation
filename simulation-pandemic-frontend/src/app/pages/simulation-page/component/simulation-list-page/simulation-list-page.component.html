@@ -1,1 +1,59 @@
 <p>simulation-list-page works!</p>
+<div class="container mt-2">
+
+  <!-- breadcrump -->
+  <div class="row">
+    <nav aria-label="breadcrumb" class="col-10">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Simulations list</li>
+      </ol>
+    </nav>
+
+    <div class="col-2 w-100">
+      <button type="button" class="btn btn-outline-dark w-100" routerLink="/simulation/create">
+        <fa-icon [icon]="icons.faPlus"></fa-icon>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- TODO search -->
+
+  <!-- employees list -->
+
+
+
+  <div class="list-group">
+
+
+    <div class="list-group-item list-group-header">
+      <div class="row">
+        <div class="col-2">name</div>
+        <div class="col-2">days of simulation</div>
+        <div class="col-1">days to death</div>
+        <div class="col-1">days to recover</div>
+        <div class="col-1">init infected</div>
+        <div class="col-2">mortality</div>
+        <div class="col-1">reproduction</div>
+        <div class="col-2">population</div>
+      </div>
+    </div>
+
+    <!-- add *ngFor and iterate for every employee -->
+    <a routerLink="/simulation/{{simulation.id}}" class="list-group-item list-group-item-action"
+       *ngFor="let simulation of simulations$ | async">
+      <div class="row">
+        <div class="col-2">{{simulation.name}}</div>
+        <div class="col-2">{{simulation.daysOfSimulation}}</div>
+        <div class="col-1">{{simulation.daysToDeath}}</div>
+        <div class="col-1">{{simulation.daysToRecover}}</div>
+        <div class="col-1">{{simulation.initInfected}}</div>
+        <div class="col-2">{{simulation.mortality}}</div>
+        <div class="col-1">{{simulation.reproduction}}</div>
+        <div class="col-2">{{simulation.population}}</div>
+      </div>
+    </a>
+
+  </div>
+</div>

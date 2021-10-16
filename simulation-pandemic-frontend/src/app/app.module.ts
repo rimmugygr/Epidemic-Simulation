@@ -12,9 +12,10 @@ import {environment} from "../environments/environment";
 import {StateClass} from "@ngxs/store/internals";
 import {NgxsStoragePluginModule, StorageOption} from "@ngxs/storage-plugin";
 import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
+import {SimulationState} from "./shared/state/simulations/simulation.state";
 
 const persistentStates: StateClass<any>[] = [SimulationState];
-const states: StateClass<any>[] = [...persistentStates, GeneratedSimulationState];
+const states: StateClass<any>[] = [...persistentStates,]// GeneratedSimulationState];
 
 @NgModule({
   declarations: [
