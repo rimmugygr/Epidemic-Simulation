@@ -65,10 +65,13 @@ public class SimulationService {
     }
 
 
-    public void deleteSimulation(Long id) {
-        isSimulationExistOrThrowException(id);
-
+    public Long deleteSimulation(Long id) {
+        SimulationDto simulation = getSimulationById(id);
+        // delete all simulated days
+        simulationDaysService.deleteSimulationDaysBySimulation(simulation);
+        // delete simulation
         simulationRepo.deleteById(id);
+        return id;
     }
 
     private void isSimulationValidateOrThrowException(SimulationDto simulation) {

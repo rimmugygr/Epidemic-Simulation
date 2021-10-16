@@ -45,7 +45,7 @@ public class SimulationController {
 
     @DeleteMapping(path = "{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteSimulation(@PathVariable Long id) {
-        service.deleteSimulation(id);
+    public Long deleteSimulation(@PathVariable Long id) {
+        return service.deleteSimulation(id);
     }
 }
