@@ -55,6 +55,9 @@ public class SimulationService {
 
         //validation simulation parameters
         isSimulationExistOrThrowException(id);
+        
+        //validation simulation parameters
+        this.isSimulationValidateOrThrowException(simulationDto);
 
         Simulation simulation = simulationMapper.map(simulationDto);
 
