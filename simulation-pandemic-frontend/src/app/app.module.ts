@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {SharedModule} from "./shared/shared.module";
@@ -13,9 +13,14 @@ import {StateClass} from "@ngxs/store/internals";
 import {NgxsStoragePluginModule, StorageOption} from "@ngxs/storage-plugin";
 import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
 import {SimulationState} from "./shared/state/simulations/simulation.state";
+import {AlertHandler} from "./shared/handler/alert.handler";
+import {UiState} from "./shared/state/ui/ui.state";
+import {RouteHandler} from "./shared/handler/route.handler";
 
 const persistentStates: StateClass<any>[] = [SimulationState];
-const states: StateClass<any>[] = [...persistentStates,]// GeneratedSimulationState];
+const states: StateClass<any>[] = [...persistentStates,UiState]// GeneratedSimulationState];
+
+const initFn = () => () => { /* use for some initialization stuff */ };
 
 @NgModule({
   declarations: [
@@ -32,7 +37,15 @@ const states: StateClass<any>[] = [...persistentStates,]// GeneratedSimulationSt
     NgxsStoragePluginModule.forRoot({ key: persistentStates, storage: StorageOption.LocalStorage}),
     NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initFn,
+      deps: [RouteHandler, AlertHandler],
+      multi: true
+    },
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

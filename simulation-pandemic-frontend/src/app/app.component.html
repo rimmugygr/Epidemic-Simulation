@@ -1,4 +1,20 @@
+<div class="container my-2">
 
 
+
+      <div class="sa" *ngIf="(successAlert$ | async) as successAlert">
+          <ngb-alert *ngIf="successAlert.show"  type="success" (closed)="hideSuccessAlert()">
+            {{ successAlert.text }}
+          </ngb-alert>
+      </div>
+
+
+    <div class="ea" *ngIf="(errorAlert$ | async) as errorAlert">
+      <ngb-alert *ngIf="errorAlert.show"  type="danger" (closed)="hideErrorAlert()">
+        {{ errorAlert.text }}
+      </ngb-alert>
+    </div>
+
+</div>
 <router-outlet></router-outlet>
 
