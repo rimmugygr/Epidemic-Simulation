@@ -1,5 +1,19 @@
 <div [formGroup]="form">
   <label [for]="id">{{ label }}</label>
   <input [class.is-invalid]="ifRequired(id)" [formControlName]="id" type="text" [id]="id" class="form-control" [placeholder]="placeholder">
-  <small *ngIf="ifRequired(id)" [id]="'validator-' + id" class="text-danger">This field is required</small>
+  <small *ngIf="ifRequired(id)" [id]="'validator-' + id" class="text-danger">
+    This field is required
+  </small>
+  <small *ngIf="ifMinValue(id)" [id]="'validator-' + id" class="text-danger">
+    This number is to small
+  </small>
+  <small *ngIf="ifMaxValue(id)" [id]="'validator-' + id" class="text-danger">
+    This number is to big
+  </small>
+  <small *ngIf="ifPatternNumberOnly(id)" [id]="'validator-' + id" class="text-danger">
+    This isn't integer number
+  </small>
+  <small *ngIf="ifNoMatchPopulationAndInitInfected(id)" [id]="'validator-' + id" class="text-danger">
+    Initial infected is bigger than population
+  </small>
 </div>

@@ -14,7 +14,7 @@
 
     <div *ngIf="pageMode.formMode === 'DETAILS'" class="col-2 w-100">
       <button type="button" class="button btn btn-danger w-100" data-toggle="modal"
-              data-target="#exampleModal">Delete</button>
+              data-target="#exampleModal" (click)="delete()">Delete</button>
     </div>
     <div *ngIf="pageMode.formMode === 'DETAILS'" class="col-2 w-100">
       <button type="button" class="button btn btn-outline-dark w-100"
@@ -78,3 +78,5 @@
       </div>
     </div>
   </form>
+
+</div>

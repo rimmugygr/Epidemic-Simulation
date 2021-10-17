@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {FORM_MODE} from "../../../../shared/model/form-mode.model";
 import {Simulation} from "../../../../shared/model/simulation.model";
 import {ActivatedRoute} from "@angular/router";
@@ -40,17 +40,26 @@ import { Location } from '@angular/common';
   }
 
   private initForm(): void {
-    this.simulationForm = this.fb.group({
-      id: [null, {disabled: true}],
-      name: [null, Validators.required],
-      population: [null, Validators.required],
-      initInfected: [null, Validators.required],
-      reproduction: [null, Validators.required],
-      mortality: [null, Validators.required],
-      daysToRecover: [null, Validators.required],
-      daysToDeath: [null, Validators.required],
-      daysOfSimulation: [null, Validators.required],
-    });
+    this.simulationForm = this.fb.group(
+      {
+        id: [null, {disabled: true}],
+        name: [null, Validators.required],
+        population: [null,
+          [Validators.required, Validators.min(1), Validators.pattern("^([+-]?[0-9]*|0)$")]],
+        initInfected: [null,
+          [Validators.required, Validators.min(1), Validators.pattern("^([+-]?[0-9]*|0)$")]],
+        reproduction: [null,
+          [Validators.required, Validators.min(0), Validators.pattern("^([+-]?[0-9]*|0)$")]],
+        mortality: [null,
+          [Validators.required, Validators.min(0), Validators.max(100), Validators.pattern("^([+-]?[0-9]*|0)$")]],
+        daysToRecover: [null,
+          [Validators.required, Validators.min(0), Validators.pattern("^([+-]?[0-9]*|0)$")]],
+        daysToDeath: [null,
+          [Validators.required, Validators.min(0), Validators.pattern("^([+-]?[0-9]*|0)$")]],
+        daysOfSimulation: [null,
+          [Validators.required, Validators.min(0), Validators.pattern("^([+-]?[0-9]*|0)$")]]
+      },
+      { validator: this.matchPopulationAndInitInfected });
 
     if (this.pageMode.formMode !== FORM_MODE.CREATE) {
       const simulation = this.store.selectSnapshot(SimulationState.getSimulationById)(+this.pageMode.id);
@@ -60,7 +69,6 @@ import { Location } from '@angular/common';
     if (this.pageMode.formMode === FORM_MODE.DETAILS) {
       this.simulationForm.disable();
     }
-
   }
 
 
@@ -75,7 +83,7 @@ import { Location } from '@angular/common';
           console.log('request success', success);
         },
         error => {
-          console.error('request errored:', error);
+          console.error('request errored:', error.error);
         },
         () => { console.log('request completed'); },
       );
@@ -85,7 +93,23 @@ import { Location } from '@angular/common';
   }
 
   update(): void {
-    this.store.dispatch(new UpdateSimulation({ simulation: this.simulationForm.value }));
+    this.showErrors = true;
+
+    if (!this.simulationForm.invalid) {
+      console.log('ready to update', this.simulationForm.value);
+
+      this.store.dispatch(new UpdateSimulation({ simulation: this.simulationForm.value })).subscribe(
+      success => {
+        console.log('request success', success);
+      },
+        error => {
+          console.error('request errored:', error.error);
+        },
+        () => { console.log('request completed'); },
+    );
+    } else {
+      console.log('not ready to update', this.simulationForm.value);
+    }
   }
 
   delete(): void {
@@ -96,14 +120,16 @@ import { Location } from '@angular/common';
     this.location.back();
   }
 
-  ifRequired(value: string): boolean {
-    const field = this.simulationForm.get(value);
 
-    return this.showErrors ? field.errors?.required : field.touched && field.errors?.required;
+  matchPopulationAndInitInfected(control: AbstractControl): ValidationErrors | null {
+    const population = control.get("population").value;
+    const initInfected = control.get("initInfected").value;
+    if (population < initInfected) { return { 'noMatch': true } }
+    return null
   }
 
   getPageModeCamelCase(): string {
-    return this.pageMode.formMode;
+    return this.pageMode.formMode.toUpperCase().charAt(0) + this.pageMode.formMode.toLowerCase().substring(1);
   }
 
 

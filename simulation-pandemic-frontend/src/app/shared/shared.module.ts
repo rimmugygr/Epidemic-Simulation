@@ -13,10 +13,11 @@ import {ReactiveFormsModule} from "@angular/forms";
     NotFoundPageComponent,
     TextInputComponent
   ],
-  imports: [
-    NgbModule,
-    ReactiveFormsModule,
-  ],
+    imports: [
+        NgbModule,
+        ReactiveFormsModule,
+        CommonModule,
+    ],
   exports: [
     ReactiveFormsModule,
     NgbModule,

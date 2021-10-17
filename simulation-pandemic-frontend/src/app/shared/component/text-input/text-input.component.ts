@@ -20,9 +20,27 @@ export class TextInputComponent implements OnInit {
 
   ifRequired(value: string): boolean {
     const field = this.form.get(value);
-
     return this.showErrors ? field.errors?.required : field.touched && field.errors?.required;
   }
 
+  ifMinValue(value: string): boolean {
+    const field = this.form.get(value);
+    return this.showErrors ? field.errors?.min : field.touched && field.errors?.min;
+  }
+
+  ifMaxValue(value: string): boolean {
+    const field = this.form.get(value);
+    return this.showErrors ? field.errors?.max : field.touched && field.errors?.max;
+  }
+
+  ifPatternNumberOnly(value: string): boolean {
+    const field = this.form.get(value);
+    return this.showErrors ? field.errors?.pattern : field.touched && field.errors?.pattern;
+  }
+
+  ifNoMatchPopulationAndInitInfected(value: string): boolean {
+    const field = this.form.get(value);
+    return this.showErrors ? this.form.errors?.noMatch : field.touched && this.form.errors?.noMatch;
+  }
 
 }
