@@ -13,6 +13,7 @@ import {
   UpdateSimulation
 } from "../../../../shared/state/simulations/simulation.actions";
 import { Location } from '@angular/common';
+import {SetErrorAlert} from "../../../../shared/state/ui/ui.actions";
 
 @Component({
   selector: 'app-simulation-form',
@@ -83,6 +84,11 @@ import { Location } from '@angular/common';
           console.log('request success', success);
         },
         error => {
+          this.store.dispatch(new SetErrorAlert({
+            errorAlert: {
+              show: true, text: error.error, length: 5 * 1000
+            }
+          }));
           console.error('request errored:', error.error);
         },
         () => { console.log('request completed'); },
@@ -99,10 +105,15 @@ import { Location } from '@angular/common';
       console.log('ready to update', this.simulationForm.value);
 
       this.store.dispatch(new UpdateSimulation({ simulation: this.simulationForm.value })).subscribe(
-      success => {
-        console.log('request success', success);
-      },
+        success => {
+          console.log('request success', success);
+        },
         error => {
+          this.store.dispatch(new SetErrorAlert({
+            errorAlert: {
+              show: true, text: error.error, length: 5 * 1000
+            }
+          }));
           console.error('request errored:', error.error);
         },
         () => { console.log('request completed'); },

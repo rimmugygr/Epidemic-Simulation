@@ -32,12 +32,24 @@ export class UiState {
 
   @Action(SetSuccessAlert)
   public setSuccessAlert(ctx: StateContext<UiStateModel>, { payload }: SetSuccessAlert): any {
-    ctx.patchState({ successAlert: payload.successAlert });
+    if (ctx.getState().successAlert.show == true) {
+      payload.successAlert.text += '<br>' + ctx.getState().successAlert.text;
+      payload.successAlert.length += ctx.getState().successAlert.length;
+      ctx.patchState({ errorAlert: payload.successAlert });
+    } else {
+      ctx.patchState({successAlert: payload.successAlert});
+    }
   }
 
   @Action(SetErrorAlert)
   public setErrorAlert(ctx: StateContext<UiStateModel>, { payload }: SetErrorAlert): any {
-    ctx.patchState({ errorAlert: payload.errorAlert });
+    if (ctx.getState().errorAlert.show == true) {
+      payload.errorAlert.text += '<br>' + ctx.getState().errorAlert.text;
+      payload.errorAlert.length += ctx.getState().errorAlert.length;
+      ctx.patchState({ errorAlert: payload.errorAlert });
+    } else {
+      ctx.patchState({ errorAlert: payload.errorAlert });
+    }
   }
 
 }

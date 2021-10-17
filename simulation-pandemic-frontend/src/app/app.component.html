@@ -3,14 +3,14 @@
 
 
       <div class="sa" *ngIf="(successAlert$ | async) as successAlert">
-          <ngb-alert *ngIf="successAlert.show"  type="success" (closed)="hideSuccessAlert()">
+          <ngb-alert *ngIf="successAlert.show"  type="success" (closed)="hideSuccessAlert()" >
             {{ successAlert.text }}
           </ngb-alert>
       </div>
 
 
     <div class="ea" *ngIf="(errorAlert$ | async) as errorAlert">
-      <ngb-alert *ngIf="errorAlert.show"  type="danger" (closed)="hideErrorAlert()">
+      <ngb-alert *ngIf="errorAlert.show"  type="danger" (closed)="hideErrorAlert()" [innerHTML]="errorAlert.text">
         {{ errorAlert.text }}
       </ngb-alert>
     </div>
