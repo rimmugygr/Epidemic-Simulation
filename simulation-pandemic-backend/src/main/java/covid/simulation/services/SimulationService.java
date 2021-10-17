@@ -67,7 +67,7 @@ public class SimulationService {
         return simulationMapper.mapToDto(simulationRepo.save(simulation));
     }
 
-
+    @Transactional
     public Long deleteSimulation(Long id) {
         SimulationDto simulation = getSimulationById(id);
         // delete all simulated days
