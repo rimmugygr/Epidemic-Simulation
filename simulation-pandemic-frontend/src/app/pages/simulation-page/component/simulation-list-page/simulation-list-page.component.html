@@ -1,5 +1,5 @@
 <p>simulation-list-page works!</p>
-<div class="container mt-2">
+<div class="container my-2">
 
   <!-- breadcrump -->
   <div class="row">
@@ -46,7 +46,7 @@
       </div>
     </div>
 
-    <div routerLink="/simulation/{{simulation.id}}" class="link-hover list-group-item list-group-item-action"
+    <div routerLink="/simulation/view/{{simulation.id}}" class="link-hover list-group-item list-group-item-action"
        *ngFor="let simulation of simulationsPaginated$ | async">
       <div class="row">
         <div class="col-3 text-center">{{simulation.name}}</div>

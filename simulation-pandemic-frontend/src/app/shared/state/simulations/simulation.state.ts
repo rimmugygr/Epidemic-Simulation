@@ -38,7 +38,7 @@ export class SimulationState {
   @Selector()
   public static getSimulationById(state: SimulationStateModel): (id: number) => Simulation {
     return (id: number): Simulation => {
-      return state.simulations.find(employee => employee.id === id);
+      return state.simulations.find(Simulation => Simulation.id === id);
     };
   }
 

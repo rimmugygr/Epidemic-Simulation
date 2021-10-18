@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {SimulationListPageComponent} from "./component/simulation-list-page/simulation-list-page.component";
-import {SimulationDetailPageComponent} from "./component/simulation-detail-page/simulation-detail-page.component";
+import {SimulationViewPageComponent} from "./component/simulation-view-page/simulation-view-page.component";
 import {SimulationFormComponent} from "./component/simulation-form/simulation-form.component";
 import {NotFoundPageComponent} from "../../shared/component/not-found-page/not-found-page.component";
 
 const routes: Routes = [
-  { path: `:id/details`, component: SimulationDetailPageComponent },
+  { path: `view/:id`, component: SimulationViewPageComponent },
   { path: 'create', component: SimulationFormComponent },
   { path: 'edit', component: NotFoundPageComponent },
   { path: 'edit/:id', component: SimulationFormComponent },

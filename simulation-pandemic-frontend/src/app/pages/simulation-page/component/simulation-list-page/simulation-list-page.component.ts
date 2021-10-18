@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Select, Store} from "@ngxs/store";
-import {combineLatest, merge, Observable, of, Subject} from "rxjs";
+import {combineLatest, Observable} from "rxjs";
 import {SimulationState} from "../../../../shared/state/simulations/simulation.state";
 import {Simulation} from "../../../../shared/model/simulation.model";
 import {FetchSimulations} from "../../../../shared/state/simulations/simulation.actions";
 import {faPlus, faEdit, faBookOpen} from "@fortawesome/free-solid-svg-icons";
-import {debounceTime, filter, map, tap} from "rxjs/operators";
+import {map} from "rxjs/operators";
 import {ListActionsService} from "../../../../shared/services/list-actions.service";
 
 @Component({

@@ -35,7 +35,7 @@ export class UiState {
     if (ctx.getState().successAlert.show == true) {
       payload.successAlert.text += '<br>' + ctx.getState().successAlert.text;
       payload.successAlert.length += ctx.getState().successAlert.length;
-      ctx.patchState({ errorAlert: payload.successAlert });
+      ctx.patchState({ successAlert: payload.successAlert });
     } else {
       ctx.patchState({successAlert: payload.successAlert});
     }
