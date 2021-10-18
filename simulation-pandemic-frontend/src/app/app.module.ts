@@ -16,9 +16,11 @@ import {SimulationState} from "./shared/state/simulations/simulation.state";
 import {AlertHandler} from "./shared/handler/alert.handler";
 import {UiState} from "./shared/state/ui/ui.state";
 import {RouteHandler} from "./shared/handler/route.handler";
+import {GeneratedSimulationState} from "./shared/state/generated-simulation/generated-simulation.state";
+import {ChartModule} from "smart-webcomponents-angular/chart";
 
 const persistentStates: StateClass<any>[] = [SimulationState];
-const states: StateClass<any>[] = [...persistentStates,UiState]// GeneratedSimulationState];
+const states: StateClass<any>[] = [...persistentStates,UiState, GeneratedSimulationState];
 
 const initFn = () => () => { /* use for some initialization stuff */ };
 
@@ -33,6 +35,7 @@ const initFn = () => () => { /* use for some initialization stuff */ };
     SharedModule,
     HomePageModule,
     SimulationPageModule,
+    ChartModule,
     NgxsModule.forRoot(states, {developmentMode: !environment.production}),
     NgxsStoragePluginModule.forRoot({ key: persistentStates, storage: StorageOption.LocalStorage}),
     NgxsReduxDevtoolsPluginModule.forRoot({disabled: environment.production}),

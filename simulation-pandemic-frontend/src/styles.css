@@ -2,3 +2,20 @@
 body {
   background: #fafafa;
 }
+/* Watermark */
+#watermark {
+  position: absolute;
+  right: -255px;
+  bottom: -255px;
+  color: #fafafa!important;
+  padding: 0;
+  border-radius: 0;
+  background: #fafafa !important;
+  cursor: pointer;
+  z-index: -100 !important;
+  display: block;
+  font-size: 0;
+  text-decoration: none;
+  font-weight: bold;
+  opacity: 0;
+}

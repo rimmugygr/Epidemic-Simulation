@@ -7,6 +7,7 @@ import { SimulationFormComponent } from './component/simulation-form/simulation-
 import {SharedModule} from "../../shared/shared.module";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {FormsModule} from "@angular/forms";
+import {ChartModule} from "smart-webcomponents-angular/chart";
 
 
 
@@ -21,7 +22,8 @@ import {FormsModule} from "@angular/forms";
         CommonModule,
         SharedModule,
         FontAwesomeModule,
-        FormsModule
+        FormsModule,
+        ChartModule
     ]
 })
 export class SimulationPageModule { }

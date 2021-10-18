@@ -3,13 +3,18 @@
 
   <div class="row">
     <!-- breadcrump -->
-    <nav aria-label="breadcrumb" class="col-8">
+    <nav aria-label="breadcrumb" class="col-6">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
         <li class="breadcrumb-item"><a routerLink="/simulation">Simulations</a></li>
         <li class="breadcrumb-item active" aria-current="page">View</li>
       </ol>
     </nav>
+
+    <div class="col-2 w-100">
+      <button type="button" class="button btn  btn-outline-dark w-100" data-toggle="modal"
+              (click)="regeneratedSimulation()">Regenerated</button>
+    </div>
 
     <div class="col-2 w-100">
       <button type="button" class="button btn  btn-outline-dark w-100" data-toggle="modal"
@@ -21,5 +26,11 @@
     </div>
   </div>
 
+  <smart-chart #chart id="chart" [caption]="caption" [description]="description"
+               [showLegend]="showLegend" [padding]="padding" [titlePadding]="titlePadding"
+               [dataSource]="this.generatedSimulation$ | async"
+               [colorScheme]="colorScheme" [xAxis]="xAxis" [clip]="clip"
+               [valueAxis]="valueAxis" [seriesGroups]="seriesGroups">
+  </smart-chart>
 
 </div>

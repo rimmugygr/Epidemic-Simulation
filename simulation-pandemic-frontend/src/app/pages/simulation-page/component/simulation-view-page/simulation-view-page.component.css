@@ -7,3 +7,8 @@
 .button {
   height: 48px;
 }
+
+smart-chart {
+  width: 100%;
+  max-width: 1850px;
+}

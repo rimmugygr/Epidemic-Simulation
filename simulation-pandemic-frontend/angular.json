@@ -27,6 +27,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/smart-webcomponents-angular/source/styles/smart.default.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
