@@ -60,7 +60,7 @@ export class SimulationState {
   constructor(private service: SimulationService) { }
 
   @Action(FetchSimulations)
-  public fetchEmployees(ctx: StateContext<SimulationStateModel>): any {
+  public fetchSimulations(ctx: StateContext<SimulationStateModel>): any {
 
     return this.service.getAllSimulations().pipe(
       tap(response => {
@@ -70,9 +70,9 @@ export class SimulationState {
   }
 
   @Action(CreateSimulation)
-  public createEmployee(ctx: StateContext<SimulationStateModel>, { payload }: CreateSimulation): any {
+  public createSimulation(ctx: StateContext<SimulationStateModel>, { payload }: CreateSimulation): any {
 
-    return this.service.postStudent(payload.simulation).pipe(
+    return this.service.postSimulation(payload.simulation).pipe(
       tap(response => {
         ctx.setState(patch({ simulations: insertItem(response) }));
       }),
@@ -80,9 +80,9 @@ export class SimulationState {
   }
 
   @Action(UpdateSimulation)
-  public updateEmployee(ctx: StateContext<SimulationStateModel>, { payload }: UpdateSimulation): any {
+  public updateSimulation(ctx: StateContext<SimulationStateModel>, { payload }: UpdateSimulation): any {
 
-    return this.service.putStudent(payload.simulation).pipe(
+    return this.service.putSimulation(payload.simulation).pipe(
       tap(response => {
         ctx.setState(patch({ simulations: updateItem(emp => emp.id === response.id, response) }));
       }),
@@ -90,9 +90,9 @@ export class SimulationState {
   }
 
   @Action(DeleteSimulation)
-  public DeleteEmployee(ctx: StateContext<SimulationStateModel>, { payload }: DeleteSimulation): any {
+  public DeleteSimulation(ctx: StateContext<SimulationStateModel>, { payload }: DeleteSimulation): any {
 
-    return this.service.deleteStudent(payload.id).pipe(
+    return this.service.deleteSimulation(payload.id).pipe(
       tap(response => {
         ctx.setState(patch({ simulations: removeItem((emp: Simulation) => emp.id === response) }));
       }),

@@ -30,19 +30,19 @@ export class SimulationService {
     );
   }
 
-  postStudent(simulation: Simulation): Observable<Simulation>  {
+  postSimulation(simulation: Simulation): Observable<Simulation>  {
     return this.http.post<Simulation>(this.baseUrl, JSON.stringify(simulation), httpOptions).pipe(
       tap(x => console.log('POSTED' + JSON.stringify(x)))
     );
   }
 
-  putStudent(simulation: Simulation): Observable<Simulation>  {
+  putSimulation(simulation: Simulation): Observable<Simulation>  {
     console.log('PUTED' + JSON.stringify(simulation));
     return this.http.put<Simulation>(this.baseUrl + simulation.id, JSON.stringify(simulation), httpOptions).pipe(
       tap(x => console.log('PUTED' + JSON.stringify(x)))
     );
   }
-  deleteStudent(simulationId: number): Observable<number>  {
+  deleteSimulation(simulationId: number): Observable<number>  {
     return this.http.delete<number>(this.baseUrl + simulationId).pipe(
       tap(x => console.log('DELETED' + JSON.stringify(x)))
     );
