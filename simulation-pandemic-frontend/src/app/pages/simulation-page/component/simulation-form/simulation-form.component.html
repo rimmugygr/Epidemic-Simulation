@@ -11,15 +11,15 @@
         <li class="breadcrumb-item active" aria-current="page">{{ getPageModeCamelCase() }}</li>
       </ol>
     </nav>
-
-    <div *ngIf="pageMode.formMode === 'DETAILS'" class="col-2 w-100">
-      <button type="button" class="button btn btn-danger w-100" data-toggle="modal"
-              data-target="#exampleModal" (click)="delete()">Delete</button>
-    </div>
     <div *ngIf="pageMode.formMode === 'DETAILS'" class="col-2 w-100">
       <button type="button" class="button btn btn-outline-dark w-100"
               routerLink="/simulation/edit/{{simulationForm.value.id}}">Edit</button>
     </div>
+    <div *ngIf="pageMode.formMode === 'DETAILS'" class="col-2 w-100">
+      <button type="button" class="button btn btn-danger w-100" data-toggle="modal"
+              data-target="#exampleModal" (click)="delete()">Delete</button>
+    </div>
+
   </div>
 
 
@@ -67,7 +67,8 @@
 
     <div *ngIf="pageMode.formMode === 'CREATE' || pageMode.formMode === 'EDIT'" class="row mt-5">
       <div class="col-2">
-        <button type="button" class="btn btn-outline-dark w-100" (click)="goBack()">Cancel</button>
+        <button type="button" class="btn btn-outline-dark w-100"
+                (click)="goBack()">Cancel</button>
       </div>
       <div class="space mx-auto"></div>
       <div class="col-2">
@@ -75,6 +76,17 @@
                 (click)="save()">Create</button>
         <button *ngIf="pageMode.formMode === 'EDIT'" type="button" class="btn btn-primary w-100"
                 (click)="update()">Update</button>
+      </div>
+    </div>
+    <div *ngIf="pageMode.formMode === 'DETAILS' " class="row mt-5">
+      <div class="col-2">
+        <button type="button" class="btn btn-outline-dark w-100"
+                (click)="goBack()">Back</button>
+      </div>
+      <div class="space mx-auto"></div>
+      <div class="col-2">
+        <button type="button" class="btn btn-primary w-100"
+                routerLink="/simulation/view/{{simulationForm.value.id}}">View</button>
       </div>
     </div>
   </form>
