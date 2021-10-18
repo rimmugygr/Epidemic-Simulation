@@ -16,3 +16,12 @@
 .button {
   height: 48px;
 }
+
+.small-button {
+  border-width: 1px !important;
+  line-height: 0 !important;
+}
+
+.link-hover:hover {
+  cursor: pointer;
+}

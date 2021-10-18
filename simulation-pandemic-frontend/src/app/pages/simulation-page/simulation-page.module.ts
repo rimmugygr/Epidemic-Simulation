@@ -6,6 +6,7 @@ import {SimulationPageRoutingModule} from "./simulation-page-routing.module";
 import { SimulationFormComponent } from './component/simulation-form/simulation-form.component';
 import {SharedModule} from "../../shared/shared.module";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -15,11 +16,12 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
     SimulationDetailPageComponent,
     SimulationFormComponent
   ],
-  imports: [
-    SimulationPageRoutingModule,
-    CommonModule,
-    SharedModule,
-    FontAwesomeModule
-  ]
+    imports: [
+        SimulationPageRoutingModule,
+        CommonModule,
+        SharedModule,
+        FontAwesomeModule,
+        FormsModule
+    ]
 })
 export class SimulationPageModule { }
