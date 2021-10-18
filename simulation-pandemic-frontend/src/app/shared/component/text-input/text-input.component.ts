@@ -39,8 +39,9 @@ export class TextInputComponent implements OnInit {
   }
 
   ifNoMatchPopulationAndInitInfected(value: string): boolean {
-    const field = this.form.get(value);
-    return this.showErrors ? this.form.errors?.noMatch : field.touched && this.form.errors?.noMatch;
+    const touched = this.form.get(value).touched;
+    const errors = this.form.errors;
+    return this.showErrors ? value == 'initInfected' &&  errors?.noMatch : value == 'initInfected' && touched && errors?.noMatch;
   }
 
 }
