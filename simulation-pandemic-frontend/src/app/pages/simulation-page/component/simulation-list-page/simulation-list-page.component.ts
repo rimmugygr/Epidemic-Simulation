@@ -47,7 +47,7 @@ export class SimulationListPageComponent implements OnInit {
       map(x => x[0]),
       map((country) =>
         country.map((x, i) => {
-          this.collectionSize = i;
+          this.collectionSize = i + 1;
           return ({id: i, simulation: x});
         })
       ),

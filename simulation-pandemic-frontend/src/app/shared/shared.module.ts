@@ -5,24 +5,29 @@ import {BrowserModule} from "@angular/platform-browser";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { TextInputComponent } from './component/text-input/text-input.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { ZeroToNumberPipe } from './pipe/zero-to-number.pipe';
+import {RouterModule} from "@angular/router";
 
 
 
 @NgModule({
   declarations: [
     NotFoundPageComponent,
-    TextInputComponent
+    TextInputComponent,
+    ZeroToNumberPipe
   ],
     imports: [
         NgbModule,
         ReactiveFormsModule,
         CommonModule,
+        RouterModule,
     ],
-  exports: [
-    ReactiveFormsModule,
-    NgbModule,
-    NotFoundPageComponent,
-    TextInputComponent
-  ]
+    exports: [
+        ReactiveFormsModule,
+        NgbModule,
+        NotFoundPageComponent,
+        TextInputComponent,
+        ZeroToNumberPipe
+    ]
 })
 export class SharedModule { }

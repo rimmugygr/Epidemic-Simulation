@@ -58,7 +58,7 @@ import {SetErrorAlert} from "../../../../shared/state/ui/ui.actions";
         daysToDeath: [null,
           [Validators.required, Validators.min(0), Validators.pattern("^([+-]?[0-9]*|0)$")]],
         daysOfSimulation: [null,
-          [Validators.required, Validators.min(0), Validators.pattern("^([+-]?[0-9]*|0)$")]]
+          [Validators.required, Validators.min(0), Validators.max(200), Validators.pattern("^([+-]?[0-9]*|0)$")]]
       },
       { validator: this.matchPopulationAndInitInfected });
 

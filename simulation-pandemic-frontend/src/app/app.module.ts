@@ -19,8 +19,8 @@ import {RouteHandler} from "./shared/handler/route.handler";
 import {GeneratedSimulationState} from "./shared/state/generated-simulation/generated-simulation.state";
 import {ChartModule} from "smart-webcomponents-angular/chart";
 
-const persistentStates: StateClass<any>[] = [SimulationState];
-const states: StateClass<any>[] = [...persistentStates,UiState, GeneratedSimulationState];
+const persistentStates: StateClass<any>[] = [SimulationState, GeneratedSimulationState];
+const states: StateClass<any>[] = [...persistentStates,UiState];
 
 const initFn = () => () => { /* use for some initialization stuff */ };
 

@@ -10,5 +10,17 @@
 
 smart-chart {
   width: 100%;
-  max-width: 1850px;
+  /*max-width: 1850px;*/
+}
+
+.small-button {
+  border-width: 1px !important;
+  margin-bottom: 16px;
+
+}
+
+
+.button-pressed-my {
+  background: #343a40;
+  color: #fff;
 }

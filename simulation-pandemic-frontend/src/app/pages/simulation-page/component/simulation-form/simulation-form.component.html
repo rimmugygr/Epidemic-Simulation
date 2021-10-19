@@ -1,9 +1,8 @@
-<p>simulation-form works!</p>
 <div class="container my-2">
 
   <div class="row">
     <!-- breadcrump -->
-    <nav aria-label="breadcrumb"  [ngClass]="{'col-8': pageMode.formMode==='DETAILS' ,
+    <nav aria-label="breadcrumb" [ngClass]="{'col-8': pageMode.formMode==='DETAILS',
                                   'col-12': pageMode.formMode==='EDIT' ||  pageMode.formMode==='CREATE'}">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
@@ -19,48 +18,54 @@
       <button type="button" class="button btn btn-danger w-100" data-toggle="modal"
               data-target="#exampleModal" (click)="delete()">Delete</button>
     </div>
-
   </div>
-
 
   <!-- simulation form -->
   <form [formGroup]="simulationForm">
     <div class="header">Simulation information</div>
     <div class="form-row">
       <div class="form-group col-md-8">
-        <app-text-input id="name" label="Simulation name" [form]="simulationForm" [showErrors]="showErrors">
+        <app-text-input id="name" label="Simulation name"
+                        [form]="simulationForm" [showErrors]="showErrors">
         </app-text-input>
       </div>
       <div class="form-group col-md-4">
-        <app-text-input id="daysOfSimulation" label="Days of simulation" [form]="simulationForm" [showErrors]="showErrors">
-        </app-text-input>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-4">
-        <app-text-input id="population" label="Population number" [form]="simulationForm" [showErrors]="showErrors">
-        </app-text-input>
-      </div>
-      <div class="form-group col-md-4">
-        <app-text-input id="daysToDeath" label="Number days to death" [form]="simulationForm" [showErrors]="showErrors">
-        </app-text-input>
-      </div>
-      <div class="form-group col-md-4">
-        <app-text-input id="daysToRecover" label="Number days to recover" [form]="simulationForm" [showErrors]="showErrors">
+        <app-text-input id="daysOfSimulation" label="Days of simulation"
+                        [form]="simulationForm" [showErrors]="showErrors">
         </app-text-input>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-4">
-        <app-text-input id="mortality" label="Mortality in percentage" [form]="simulationForm" [showErrors]="showErrors">
+        <app-text-input id="population" label="Population number"
+                        [form]="simulationForm" [showErrors]="showErrors">
         </app-text-input>
       </div>
       <div class="form-group col-md-4">
-        <app-text-input id="reproduction" label="Reproduction per one infected" [form]="simulationForm" [showErrors]="showErrors">
+        <app-text-input id="daysToDeath" label="Number days to death"
+                        [form]="simulationForm" [showErrors]="showErrors">
         </app-text-input>
       </div>
       <div class="form-group col-md-4">
-        <app-text-input id="initInfected" label="Number initial infected" [form]="simulationForm" [showErrors]="showErrors">
+        <app-text-input id="daysToRecover" label="Number days to recover"
+                        [form]="simulationForm" [showErrors]="showErrors">
+        </app-text-input>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <app-text-input id="mortality" label="Mortality in percentage"
+                        [form]="simulationForm" [showErrors]="showErrors">
+        </app-text-input>
+      </div>
+      <div class="form-group col-md-4">
+        <app-text-input id="reproduction" label="Reproduction per one infected"
+                        [form]="simulationForm" [showErrors]="showErrors">
+        </app-text-input>
+      </div>
+      <div class="form-group col-md-4">
+        <app-text-input id="initInfected" label="Number initial infected"
+                        [form]="simulationForm" [showErrors]="showErrors">
         </app-text-input>
       </div>
     </div>

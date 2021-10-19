@@ -1,4 +1,3 @@
-<p>simulation-detail-page works!</p>
 <div class="container my-2">
 
   <div class="row">
@@ -26,11 +25,54 @@
     </div>
   </div>
 
+  <div class="header">Simulation charts</div>
+  <div class="row">
+
+    <div class="col-2">
+      <button type="button" (click)="setChartLine()"
+              [ngClass]="linePressed ? 'small-button btn-sm btn-outline-dark w-100 button-pressed-my' :
+              'small-button btn-sm btn-outline-dark w-100'" >
+        Line Chart
+      </button>
+    </div>
+    <div class="col-2">
+      <button type="button" class="small-button btn-sm btn-outline-dark w-100" (click)="setChartFilled()"
+              [ngClass]="filledPressed ? 'small-button btn-sm btn-outline-dark w-100 button-pressed-my' :
+              'small-button btn-sm btn-outline-dark w-100'">
+        Filled Chart
+      </button>
+    </div>
+    <div class="col-2">
+      <button type="button" class="small-button btn-sm btn-outline-dark w-100" (click)="setChartDay()"
+              [ngClass]="dayPressed ? 'small-button btn-sm btn-outline-dark w-100 button-pressed-my' :
+              'small-button btn-sm btn-outline-dark w-100'">
+        Day Chart
+      </button>
+    </div>
+    <div class="col-4 " *ngIf="pickDay">
+    </div>
+    <div class="col-1 " *ngIf="pickDay">
+      Pick day
+    </div>
+    <div class="col-1 " *ngIf="pickDay">
+      <select class="form-control form-control-sm btn-outline-dark" placeholder="Pick day"
+               [(ngModel)]="selectedValue" (change)="onSelect()">
+        <option *ngFor="let day of this.simulation.daysOfSimulation | zeroToNumber">{{day}}</option>
+      </select>
+    </div>
+  </div>
+
   <smart-chart #chart id="chart" [caption]="caption" [description]="description"
                [showLegend]="showLegend" [padding]="padding" [titlePadding]="titlePadding"
-               [dataSource]="this.generatedSimulation$ | async"
-               [colorScheme]="colorScheme" [xAxis]="xAxis" [clip]="clip"
-               [valueAxis]="valueAxis" [seriesGroups]="seriesGroups">
+               [colorScheme]="colorScheme" [seriesGroups]="seriesGroups"
+               [dataSource]="this.originalDataFormat? (this.generatedSimulation$ | async) : (this.generatedSimulationOneDay$ | async)"
+               [showBorderLine]="showBorderLine"
+               [clip]="clip">
   </smart-chart>
-
+  <div class="row mt-5">
+    <div class="col-2">
+      <button type="button" class="btn btn-outline-dark w-100"
+              (click)="goBack()">Back</button>
+    </div>
+  </div>
 </div>
