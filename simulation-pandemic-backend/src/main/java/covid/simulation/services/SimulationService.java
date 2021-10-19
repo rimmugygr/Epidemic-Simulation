@@ -16,11 +16,8 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class SimulationService {
-    private final GenerateSimulationDaysService generateService;
     private final SimulationDaysService simulationDaysService;
-
     private final SimulationRepository simulationRepo;
-
     private final SimulationMapper simulationMapper;
 
     public List<SimulationDto> getAllSimulations() {
